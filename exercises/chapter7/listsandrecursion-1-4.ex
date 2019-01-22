@@ -30,4 +30,8 @@ defmodule MyList do
     end
   end
 
+  def span(from, to) when from > to, do: raise "from must be <= to"
+  def span(to, to), do: []
+  def span(from, to) when from < to, do: [from | span(from + 1, to)]
+
 end
