@@ -1,5 +1,5 @@
 defmodule MyList do
-  
+
   def map([], _func), do: []
   def map([head | tail], func), do: [func.(head) | map(tail, func)]
 
@@ -128,13 +128,23 @@ defmodule MyList do
   defp flatten([head | tail0], tail1) when is_list(head) do
     flatten(head, flatten(tail0, tail1))
   end
-  
+
   defp flatten([head | tail0], tail1) do
     [head | flatten(tail0, tail1)]
   end
 
   defp flatten([], tail) do
     tail
+  end
+
+
+  def primes(n) when n > 1 do
+    filter(span(2, n + 1), &isPrime?/1)
+  end
+
+
+  defp isPrime?(n) do
+    all?((for x <- span(2, n), do: rem(n, x)), &(&1 != 0))
   end
 
 end
